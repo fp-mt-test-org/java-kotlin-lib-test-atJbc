@@ -1,0 +1,16 @@
+flex:
+  version: 0.5.1
+  workflows:
+    setup-dependencies:
+      command: pip3 install battenberg
+    setup-repo:
+      depends-on: setup-dependencies
+      command: ./.ngif/setup-repo.sh
+    update-template:
+      depends-on: setup-dependencies
+      command: battenberg upgrade --no-input
+    build:
+      depends-on: setup-repo
+      command: ./gradlew build
+service:
+  name: 'java-kotlin-lib-test-atJbc'
